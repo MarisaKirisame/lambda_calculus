@@ -26,6 +26,7 @@ namespace lambda_calculus
 	static_assert( ToInt< Multiply::apply< Zero >::value::apply< One >::value >::value == 0, "" );
 	static_assert( ToInt< Multiply::apply< Two >::value::apply< Three >::value >::value == 6, "" );
 	static_assert( ToInt< Power::apply< Two >::value::apply< Three >::value >::value == 8, "" );
+	static_assert( ToInt< Power::apply< Three >::value::apply< Three >::value >::value == 27, "" );
 	int example( )
 	{
 		cout << "hello world";
