@@ -2,127 +2,105 @@
 #include "propositional_logic.hpp"
 namespace lambda_calculus
 {
-	template< int n >
-	struct Int;
-	template< >
-	struct Int< 0 >
-	{
-		template< typename x >
-		struct apply
-		{
-			struct value
-			{
-				template< typename y >
-				struct apply
-				{
-					typedef y value;
-				};
-			};
-		};
-	};
-	struct Next
-	{
-		template< typename x >
-		struct apply
-		{
-			struct value
-			{
-				template< typename y >
-				struct apply
-				{
-					struct value
-					{
-						template< typename z >
-						struct apply
-						{
-							typedef typename y::template apply< typename x::template apply< y >::value::template apply< z >::value >::value value;
-						};
-					};
-				};
-			};
-		};
-	};
-	template< int n >
-	struct Int
-	{
-		template< typename x >
-		struct apply
-		{
-			typedef typename Next::apply< Int< n - 1 > >::value::template apply< x >::value value;
-		};
-	};
-	struct Plus
-	{
-		template< typename a >
-		struct apply
-		{
-			struct value
-			{
-				template< typename b >
-				struct apply
-				{
-					struct value
-					{
-						template< typename c >
-						struct apply
-						{
-							struct value
-							{
-								template< typename d >
-								struct apply
-								{
-									typedef typename a::template apply< c >::value::template apply< typename b::template apply< c >::value::template apply< d >::value >::value value;
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-	struct Multiply
-	{
-		template< typename x >
-		struct apply
-		{
-			struct value
-			{
-				template< typename y >
-				struct apply
-				{
-					typedef typename x::template apply< typename Plus::template apply< y >::value >::value::template apply< Int< 0 > >::value value;
-				};
-			};
-		};
-	};
-	struct Power
-	{
-		template< typename x >
-		struct apply
-		{
-			struct value
-			{
-				template< typename y >
-				struct apply
-				{
-					typedef typename y::template apply< x >::value value;
-				};
-			};
-		};
-	};
-	typedef Int< 0 > Zero;
-	typedef Int< 1 > One;
-	typedef Int< 2 > Two;
-	typedef Int< 3 > Three;
-	typedef Int< 4 > Four;
-	typedef Int< 5 > Five;
-	typedef Int< 6 > Six;
-	typedef Int< 7 > Seven;
-	typedef Int< 8 > Eight;
-	typedef Int< 9 > Nine;
-	typedef Int< 10 > Ten;
-	typedef Int< 11 > Eleven;
-	typedef Int< 12 > Twelve;
+
+	typedef
+	abstraction
+	<
+		abstraction
+		<
+			abstraction
+			<
+				application
+				<
+					variable< -2 >,
+					application
+					<
+						application
+						<
+							variable< -3 >,
+							variable< -2 >
+						>,
+						variable< -1 >
+					>
+				>
+			>
+		>
+	> Next;
+	typedef False Zero;
+	typedef Next::apply< Zero >::value One;
+	typedef Next::apply< One >::value Two;
+	typedef Next::apply< Two >::value Three;
+	typedef Next::apply< Three >::value Four;
+	typedef Next::apply< Four >::value Five;
+	typedef Next::apply< Five >::value Six;
+	typedef Next::apply< Six >::value Seven;
+	typedef Next::apply< Seven >::value Eight;
+	typedef Next::apply< Eight >::value Nine;
+	typedef Next::apply< Nine >::value Ten;
+	typedef Next::apply< Ten >::value Eleven;
+	typedef Next::apply< Eleven >::value Twelve;
+	typedef
+	abstraction
+	<
+		abstraction
+		<
+			abstraction
+			<
+				abstraction
+				<
+					application
+					<
+						application
+						<
+							variable< -4 >,
+							variable< -2 >
+						>,
+						application
+						<
+							application
+							<
+								variable< -3 >,
+								variable< -2 >
+							>,
+							variable< -1 >
+						>
+					>
+				>
+			>
+		>
+	> Plus;
+	typedef
+	abstraction
+	<
+		abstraction
+		<
+			application
+			<
+				application
+				<
+					variable< -2 >,
+					application
+					<
+						Plus,
+						variable< -1 >
+					>
+				>,
+				Zero
+			>
+		>
+	> Multiply;
+	typedef
+	abstraction
+	<
+		abstraction
+		<
+			application
+			<
+				variable< -1 >,
+				variable< -2 >
+			>
+		>
+	> Power;
 	template< typename x >
 	struct ToInt
 	{
@@ -130,16 +108,26 @@ namespace lambda_calculus
 		struct num
 		{
 			static constexpr int count = n;
-			typedef num value;
-		};
-		struct accumulate
-		{
 			template< typename y >
 			struct apply
 			{
-				typedef num< y::count + 1 > value;
+				typedef num value;
 			};
 		};
-		static constexpr int value = x::template apply< accumulate >::value::template apply< num< 0 > >::value::count;
+		struct accumulate
+		{
+			static constexpr int value = 0;
+			template< typename y >
+			struct apply
+			{
+				typedef num< rem_application< y >::value::count + 1 > value;
+			};
+			template< int d, typename i >
+			struct rebound
+			{
+				typedef accumulate value;
+			};
+		};
+		static constexpr int value = rem_application< typename x::template apply< accumulate >::value::template apply< num< 0 > >::value >::value::count;
 	};
 }

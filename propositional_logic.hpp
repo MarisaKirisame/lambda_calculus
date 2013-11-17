@@ -1,88 +1,74 @@
 #pragma once
+#include "lambda_calculus.hpp"
 namespace lambda_calculus
 {
-	struct True
-	{
-		template< typename x >
-		struct apply
-		{
-			struct value
-			{
-				template< typename y >
-				struct apply
-				{
-					typedef x value;
-				};
-			};
-		};
-	};
-	struct False
-	{
-		template< typename x >
-		struct apply
-		{
-			struct value
-			{
-				template< typename y >
-				struct apply
-				{
-					typedef y value;
-				};
-			};
-		};
-	};
-	struct And
-	{
-		template< typename x >
-		struct apply
-		{
-			struct value
-			{
-				template< typename y >
-				struct apply
-				{
-					typedef typename x::template apply< y >::value::template apply< x >::value value;
-				};
-			};
-		};
-	};
-	struct Or
-	{
-		template< typename x >
-		struct apply
-		{
-			struct value
-			{
-				template< typename y >
-				struct apply
-				{
-					typedef typename x::template apply< x >::value::template apply< y >::value value;
-				};
-			};
-		};
-	};
-	struct Not
-	{
-		template< typename x >
-		struct apply
-		{
-			struct value
-			{
-				template< typename a >
-				struct apply
-				{
-					struct value
-					{
-						template< typename b >
-						struct apply
-						{
-							typedef typename x::template apply< b >::value::template apply< a >::value value;
-						};
-					};
-				};
-			};
-		};
-	};
+	typedef
+	abstraction
+	<
+		abstraction
+		<
+			variable< -2 >
+		>
+	> True;
+	typedef
+	abstraction
+	<
+		abstraction
+		<
+			variable< -1 >
+		>
+	> False;
+	typedef
+	abstraction
+	<
+		abstraction
+		<
+			application
+			<
+				application
+				<
+					variable< -2 >,
+					variable< -1 >
+				>,
+				variable< -2 >
+			>
+		>
+	> And;
+	typedef
+	abstraction
+	<
+		abstraction
+		<
+			application
+			<
+				application
+				<
+					variable< -2 >,
+					variable< -2 >
+				>,
+				variable< -1 >
+			>
+		>
+	> Or;
+	typedef
+	abstraction
+	<
+		abstraction
+		<
+			abstraction
+			<
+				application
+				<
+					application
+					<
+						variable< -3 >,
+						variable< -1 >
+					>,
+					variable< -2 >
+				>
+			>
+		>
+	> Not;
 	template< typename t >
 	struct ToBool;
 	template< >
