@@ -4,10 +4,12 @@
 #include "pair.hpp"
 #include "list.hpp"
 #include "int.hpp"
+#include "SKI_combinator_calculus.hpp"
 #include <iostream>
 namespace lambda_calculus
 {
 	using namespace std;
+	using namespace SKI_combinator_calculus;
 	static_assert( ToBool< True >::value, "" );
 	static_assert( ToBool< Not::apply< True >::value >::value == false, "" );
 	static_assert( ToBool< Not::apply< Not::apply< True >::value >::value >::value, "" );
@@ -27,6 +29,9 @@ namespace lambda_calculus
 	static_assert( ToInt< Multiply::apply< Two >::value::apply< Three >::value >::value == 6, "" );
 	static_assert( ToInt< Power::apply< Two >::value::apply< Three >::value >::value == 8, "" );
 	static_assert( ToInt< Power::apply< Three >::value::apply< Three >::value >::value == 27, "" );
+	static_assert( ToBool< I::apply< True >::value >::value, "" );
+	static_assert( ToBool< K::apply< True >::value::apply< False >::value >::value, "" );
+	static_assert( ToBool< S::apply< K >::value::apply< S >::value::apply< K >::value >::value, "" );
 	int example( )
 	{
 		cout << "hello world";
