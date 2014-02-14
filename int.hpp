@@ -114,6 +114,19 @@ namespace lambda_calculus
 				typedef num value;
 			};
 		};
+
+		template< typename a >
+		struct rem_application
+		{
+			typedef a value;
+		};
+
+		template< typename a, typename b >
+		struct rem_application< application< a, b > >
+		{
+			typedef typename rem_application< typename a::template apply< b >::value >::value value;
+		};
+
 		struct accumulate
 		{
 			static constexpr int value = 0;

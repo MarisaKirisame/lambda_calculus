@@ -42,19 +42,4 @@ namespace lambda_calculus
 			typedef abstraction< typename x::template rebound< depth + 1, t >::value > value;
 		};
 	};
-
-	template< typename x >
-	struct rem_application;
-
-	template< typename x, typename y >
-	struct rem_application< application< x, y > >
-	{
-		typedef typename rem_application< typename x::template apply< y >::value >::value value;
-	};
-
-	template< typename x >
-	struct rem_application
-	{
-		typedef x value;
-	};
 }
