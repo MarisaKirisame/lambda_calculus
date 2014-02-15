@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LAMBDA_CALCULUS_INT
+#define LAMBDA_CALCULUS_INT
 #include "propositional_logic.hpp"
 namespace lambda_calculus
 {
@@ -144,3 +145,4 @@ namespace lambda_calculus
 		static constexpr int value = rem_application< typename x::template apply< accumulate >::value::template apply< num< 0 > >::value >::value::count;
 	};
 }
+#endif //LAMBDA_CALCULUS_INT

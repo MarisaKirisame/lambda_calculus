@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LAMBDA_CALCULUS_LIST
+#define LAMBDA_CALCULUS_LIST
 #include "propositional_logic.hpp"
 namespace lambda_calculus
 {
@@ -16,3 +17,4 @@ namespace lambda_calculus
 		>
 	> Null;
 }
+#endif //LAMBDA_CALCULUS_LIST

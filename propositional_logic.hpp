@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LAMBDA_CALCULUS_PROPOSITIONAL_LOGIC
+#define LAMBDA_CALCULUS_PROPOSITIONAL_LOGIC
 #include "lambda_calculus.hpp"
 namespace lambda_calculus
 {
@@ -84,6 +85,7 @@ namespace lambda_calculus
 	template< typename t >
 	struct ToBool
 	{
-		static constexpr bool value = ToBool< typename t::template apply< True >::value::template apply< False >::value >::value;
+		static constexpr bool value = ToBool< typename t::template apply< True >::type::template apply< False >::type >::value;
 	};
 }
+#endif //LAMBDA_CALCULUS_PROPOSITIONAL_LOGIC

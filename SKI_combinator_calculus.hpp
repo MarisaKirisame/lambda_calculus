@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LAMBDA_CALCULUS_SKI_COMBINATOR_CALCULUS
+#define LAMBDA_CALCULUS_SKI_COMBINATOR_CALCULUS
 #include "boost/mpl/count.hpp"
 #include "boost/mpl/at.hpp"
 #include "boost/mpl/apply.hpp"
@@ -115,7 +116,7 @@ namespace lambda_calculus
 				template< typename str >
 				struct parse_single< str, true >
 				{
-					typedef typename SKI_parser::apply< typename boost::mpl::pop_front< str >::type >::value type;
+					typedef typename SKI_parser::apply< typename boost::mpl::pop_front< str >::type >::type type;
 					typedef typename skip_bracket< str >::type next;
 				};
 
@@ -129,7 +130,7 @@ namespace lambda_calculus
 					typedef typename
 					parse_continue
 					<
-						typename before::template apply< typename parse_next::type >::value,
+						typename before::template apply< typename parse_next::type >::type,
 						typename parse_next::next
 					>::type type;
 				};
@@ -143,8 +144,9 @@ namespace lambda_calculus
 					is_end< string >::value,
 					parse_error,
 					typename parse_continue< typename parse_single< string >::type, typename parse_single< string >::next >::type
-				>::type value;
+				>::type type;
 			};
 		};
 	}
 }
+#endif //LAMBDA_CALCULUS_SKI_COMBINATOR_CALCULUS

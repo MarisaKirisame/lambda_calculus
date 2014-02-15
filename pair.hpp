@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LAMBDA_CALCULUS_PAIR
+#define LAMBDA_CALCULUS_PAIR
 #include "lambda_calculus.hpp"
 #include "propositional_logic.hpp"
 namespace lambda_calculus
@@ -41,3 +42,4 @@ namespace lambda_calculus
 		>
 	> Second;
 }
+#endif //LAMBDA_CALCULUS_PAIR
