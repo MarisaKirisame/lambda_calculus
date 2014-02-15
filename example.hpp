@@ -1,4 +1,7 @@
 #pragma once
+#include "type_traits"
+#include "boost/mpl/same_as.hpp"
+#include "boost/mpl/string.hpp"
 #include "lambda_calculus.hpp"
 #include "propositional_logic.hpp"
 #include "pair.hpp"
@@ -31,7 +34,9 @@ namespace lambda_calculus
 	static_assert( ToInt< Power::apply< Three >::value::apply< Three >::value >::value == 27, "" );
 	static_assert( ToBool< I::apply< True >::value >::value, "" );
 	static_assert( ToBool< K::apply< True >::value::apply< False >::value >::value, "" );
-	static_assert( ToBool< S::apply< K >::value::apply< S >::value::apply< K >::value >::value, "" );
+	typedef S::apply< K >::value::apply< S >::value::apply< K >::value SKSK;
+	static_assert( ToBool< SKSK >::value, "" );
+	static_assert( std::is_same< SKI_combinator_calculus::SKI_parser::apply< boost::mpl::string< 'SKSK' > >::value, SKSK >::value, "" );
 	int example( )
 	{
 		cout << "hello world";
