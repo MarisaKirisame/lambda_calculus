@@ -1,4 +1,5 @@
 #pragma once
+#include "boost/mpl/count.hpp"
 #include "boost/mpl/at.hpp"
 #include "boost/mpl/apply.hpp"
 #include "boost/mpl/contains.hpp"
@@ -45,6 +46,7 @@ namespace lambda_calculus
 		> S;
 		typedef True K;
 		typedef abstraction< variable< -1 > > I;
+
 		typedef
 		boost::mpl::map
 		<
@@ -60,74 +62,81 @@ namespace lambda_calculus
 			boost::mpl::char_< '(' >,
 			boost::mpl::char_< ')' >
 		> valid_token;
+		template< typename str, bool e = boost::mpl::empty< str >::value >
+		struct is_end;
 		template< typename str >
-		struct is_end
-		{ static const bool value = boost::mpl::empty< str >::value || boost::mpl::front< str >::type::value == boost::mpl::char_< ')' >::value; };
+		struct is_end< str, false >
+		{ static const bool value = boost::mpl::front< str >::type::value == boost::mpl::char_< ')' >::value; };
+		template< typename str >
+		struct is_end< str, true > { static const bool value = true; };
 		struct parse_error{ };
+		template< typename str, bool b = boost::mpl::empty< str >::value >
+		struct ignore_invalid;
 		template< typename str >
-		struct ignore_invalid
+		struct ignore_invalid< str, true > { typedef str type; };
+		template< typename str >
+		struct ignore_invalid< str, false >
 		{
-			template< typename s, bool b = boost::mpl::empty< str >::value >
-			struct recurse;
-
-			template< typename s >
-			struct recurse< s, true > { typedef parse_error type; };
-
-			template< typename s >
-			struct recurse< s, false >
-			{ typedef typename ignore_invalid< typename boost::mpl::pop_front< s >::type >::type type; };
-
-			static_assert( boost::mpl::contains< valid_token, boost::mpl::char_< 'S' > >::value, "" );
 			typedef typename
 			boost::mpl::if_c
 			<
-				boost::mpl::empty< str >::value,
-				parse_error,
-				typename boost::mpl::if_c
-				<
-					boost::mpl::contains< valid_token, typename boost::mpl::front< str >::type >::value,
-					str,
-					typename recurse< str >::type
-				>::type
+				boost::mpl::contains< valid_token, typename boost::mpl::front< str >::type >::value,
+				str,
+				typename ignore_invalid< typename boost::mpl::pop_front< str >::type >::type
 			>::type type;
 		};
-		template< typename str >
-		struct parse_single
-		{
-			typedef typename boost::mpl::front< str >::type first;
-			typedef typename
-			boost::mpl::if_c
-			<
-				boost::mpl::contains< valid_token, first >::value,
-				typename boost::mpl::at< SKI_map, first >::type,
-				parse_error
-			>::type type;
-			typedef typename
-			boost::mpl::if_c
-			<
-				boost::mpl::contains< valid_token, first >::value,
-				typename boost::mpl::pop_front< str >::type,
-				parse_error
-			>::type next;
-		};
-		template< typename before, typename str, bool b = is_end< str >::value >
-		struct parse_continue;
-		template< typename before, typename str >
-		struct parse_continue< before, str, false >
-		{
-			typedef typename ignore_invalid< str >::type string;
-			typedef parse_single< string > parse_next;
-			typedef typename parse_continue< typename before::template apply< typename parse_next::type >::value, typename parse_next::next >::type type;
-		};
-		template< typename before, typename str >
-		struct parse_continue< before, str, true > { typedef before type; };
-
 		struct SKI_parser
 		{
-			template< typename str >
+			template< typename ssstr >
 			struct apply
 			{
-				typedef typename ignore_invalid< str >::type string;
+				template< typename str, int i = boost::mpl::front< str >::type::value == '(' ? 1 : 0 >
+				struct skip_bracket
+				{
+					typedef typename boost::mpl::pop_front< str >::type next_str;
+					typedef typename boost::mpl::front< next_str >::type front;
+					typedef typename skip_bracket< next_str, ( front::value == '(' ? i + 1 : ( front::value == ')' ? i - 1 : i ) ) >::type type;
+				};
+
+				template< typename str >
+				struct skip_bracket< str, 0 >
+				{
+					typedef typename boost::mpl::pop_front< str >::type type;
+				};
+				template< typename str, bool b = boost::mpl::front< str >::type::value == '(' >
+				struct parse_single;
+				template< typename str >
+				struct parse_single< str, false >
+				{
+					typedef typename boost::mpl::front< str >::type first;
+					typedef typename boost::mpl::at< SKI_map, first >::type type;
+					typedef typename boost::mpl::pop_front< str >::type next;
+				};
+				template< typename str >
+				struct parse_single< str, true >
+				{
+					typedef typename SKI_parser::apply< typename boost::mpl::pop_front< str >::type >::value type;
+					typedef typename skip_bracket< str >::type next;
+				};
+
+				template< typename before, typename str, bool b = is_end< typename ignore_invalid< str >::type >::value >
+				struct parse_continue;
+				template< typename before, typename str >
+				struct parse_continue< before, str, false >
+				{
+					typedef typename ignore_invalid< str >::type string;
+					typedef parse_single< string > parse_next;
+					typedef typename
+					parse_continue
+					<
+						typename before::template apply< typename parse_next::type >::value,
+						typename parse_next::next
+					>::type type;
+				};
+				template< typename before, typename str >
+				struct parse_continue< before, str, true > { typedef before type; };
+
+				typedef typename ignore_invalid< ssstr >::type string;
 				typedef typename
 				boost::mpl::if_c
 				<

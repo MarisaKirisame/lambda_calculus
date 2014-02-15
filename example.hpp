@@ -36,7 +36,7 @@ namespace lambda_calculus
 	static_assert( ToBool< K::apply< True >::value::apply< False >::value >::value, "" );
 	typedef S::apply< K >::value::apply< S >::value::apply< K >::value SKSK;
 	static_assert( ToBool< SKSK >::value, "" );
-	static_assert( std::is_same< SKI_combinator_calculus::SKI_parser::apply< boost::mpl::string< 'SKSK' > >::value, SKSK >::value, "" );
+	static_assert( ToBool< SKI_combinator_calculus::SKI_parser::apply< boost::mpl::string< '(SK)','(IS)',' K  ' > >::value >::value, "" );
 	int example( )
 	{
 		cout << "hello world";
