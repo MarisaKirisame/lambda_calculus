@@ -9,11 +9,14 @@
 #include "list.hpp"
 #include "church_numeral.hpp"
 #include "SKI_combinator_calculus.hpp"
+#include "BCKW_system.hpp"
+#include "parser.hpp"
+#include "Iota.hpp"
 #include <iostream>
 namespace lambda_calculus
 {
 	using namespace std;
-	using namespace SKI_combinator_calculus;
+	using namespace SKI_combinator_logic;
 	using namespace church_numeral;
 	static_assert( ToBool< True >::value, "" );
 	static_assert( ToBool< Not::apply< True >::type >::value == false, "" );
@@ -38,8 +41,10 @@ namespace lambda_calculus
 	static_assert( ToBool< K::apply< True >::type::apply< False >::type >::value, "" );
 	typedef S::apply< K >::type::apply< S >::type::apply< K >::type SKSK;
 	static_assert( ToBool< SKSK >::value, "" );
-	static_assert( ToBool< SKI_combinator_calculus::SKI_parser::apply< boost::mpl::string< '(SK)','(I(I','S)) ',' K  ' > >::type >::value, "" );
+	static_assert( ToBool< SKI_parser::apply< boost::mpl::string< '(SK)','(I(I',' )) ',' K  ' > >::type >::value, "" );
 	static_assert( ToInt< Int< 12 >::type >::value == 12, "" );
+	static_assert( ToBool< BCKW_combinator_logic::BCKW_parser::apply< boost::mpl::string< 'B(B(', 'BW)C', ')(BB',')','KKK' > >::type >::value, "" );
+	static_assert( ToBool< Iote_combinator_logic::Iota_parser::apply< boost::mpl::string<'(U(U', '(UU)', ') ) '> >::type >::value, "" );
 	int example( )
 	{
 		cout << "hello world";
