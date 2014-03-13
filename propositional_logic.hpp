@@ -70,6 +70,25 @@ namespace lambda_calculus
 			>
 		>
 	> Not;
+	typedef
+	abstraction
+	<
+		abstraction
+		<
+			abstraction
+			<
+				application
+				<
+					application
+					<
+						variable< -3 >,
+						variable< -2 >
+					>,
+					variable< -1 >
+				>
+			>
+		>
+	> Conditional;
 	template< typename t >
 	struct ToBool;
 	template< >

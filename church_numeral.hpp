@@ -99,6 +99,65 @@ namespace lambda_calculus
 		<
 			abstraction
 			<
+				abstraction
+				<
+					application
+					<
+						application
+						<
+							application
+							<
+								variable< -3 >,
+								abstraction
+								<
+									abstraction
+									<
+										application
+										<
+											variable< -1 >,
+											application
+											<
+												variable< -2 >,
+												variable< -4 >
+											>
+										>
+									>
+								>
+							>,
+							abstraction
+							<
+								variable< -2 >
+							>
+						>,
+						abstraction
+						<
+							variable< -1 >
+						>
+					>
+				>
+			>
+		> Before;
+		typedef
+		abstraction
+		<
+			abstraction
+			<
+				application
+				<
+					application
+					<
+						variable< -1 >,
+						Before
+					>,
+					variable< -2 >
+				>
+			>
+		> Minus;
+		typedef
+		abstraction
+		<
+			abstraction
+			<
 				application
 				<
 					variable< -1 >,
@@ -106,6 +165,115 @@ namespace lambda_calculus
 				>
 			>
 		> Power;
+		typedef
+		abstraction
+		<
+			application
+			<
+				Not,
+				application
+				<
+					application
+					<
+						variable< -1 >,
+						application
+						<
+							Or,
+							True
+						>
+					>,
+					False
+				>
+			>
+		> IsZero;
+		typedef
+		abstraction
+		<
+			abstraction
+			<
+				application
+				<
+					Not,
+					application
+					<
+						IsZero,
+						application
+						<
+							application
+							<
+								Minus,
+								variable< -2 >
+							>,
+							variable< -1 >
+						>
+					>
+				>
+			>
+		> Larger;
+		typedef
+		abstraction
+		<
+			abstraction
+			<
+				application
+				<
+					Not,
+					application
+					<
+						IsZero,
+						application
+						<
+							application
+							<
+								Minus,
+								variable< -1 >
+							>,
+							variable< -2 >
+						>
+					>
+				>
+			>
+		> Smaller;
+		typedef
+		abstraction
+		<
+			abstraction
+			<
+				application
+				<
+					application
+					<
+						And,
+						application
+						<
+							Not,
+							application
+							<
+								application
+								<
+									Larger,
+									variable< -2 >
+								>,
+								variable< -1 >
+							>
+						>
+					>,
+					application
+					<
+						Not,
+						application
+						<
+							application
+							<
+								Smaller,
+								variable< -2 >
+							>,
+							variable< -1 >
+						>
+					>
+				>
+			>
+		> Equal;
 		template< typename x >
 		struct ToInt
 		{
@@ -118,6 +286,17 @@ namespace lambda_calculus
 				{
 					typedef num type;
 				};
+				template< int depth, typename t >
+				struct rebound
+				{
+					typedef num< n > type;
+				};
+			};
+
+			template< int depth, typename t >
+			struct rebound
+			{
+				typedef ToInt< typename x::template rebound< depth, t >::type > type;
 			};
 
 			template< typename a >
