@@ -94,10 +94,5 @@ namespace lambda_calculus
 		>
 	>recursive_test;
 	static_assert( ToInt< Y::apply< recursive_test >::type::apply< One >::type >::value == 10 , "" );
-	int example( )
-	{
-		cout << "hello world";
-		return 0;
-	}
 }
 #endif //LAMBDA_CALCULUS_EXAMPLE

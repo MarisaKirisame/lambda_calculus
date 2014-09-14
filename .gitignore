@@ -12,6 +12,4 @@
 *.la
 *.a
 .directory
-main.cpp
-*.pro
 *.pro.user
