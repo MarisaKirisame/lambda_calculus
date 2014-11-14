@@ -43,9 +43,9 @@ namespace lambda_calculus
 	static_assert( ToBool< SKSK >::value, "" );
 	static_assert( ToBool< SKI_parser::apply< boost::mpl::string< '(SK)','(I(I',' )) ',' K  ' > >::type >::value, "" );
 	static_assert( ToInt< Int< 12 >::type >::value == 12, "" );
-	static_assert( ToBool< BCKW_combinator_logic::BCKW_parser::apply< boost::mpl::string< 'B(B(', 'BW)C', ')(BB',')','KKK' > >::type >::value, "" );
-	static_assert( ToBool< Iote_combinator_logic::Iota_parser::apply< boost::mpl::string<'(U(U', '(UU)', ') ) '> >::type >::value, "" );
-	static_assert( ToInt< Conditional::apply< False >::type::apply< church_numeral::Int< 12 >::type >::type::apply< church_numeral::Int< 45 >::type >::type >::value == 45, "" );
+    static_assert( ToBool< BCKW_combinator_logic::BCKW_parser::apply< boost::mpl::string< 'B(B(', 'BW)C', ')(BB',')','KKK' > >::type >::value );
+    static_assert( ToBool< Iota_combinator_logic::Iota_parser::apply< boost::mpl::string< '(U(U', '(UU)', ') ) '> >::type >::value );
+    static_assert( ToInt< Conditional::apply< False >::type::apply< church_numeral::Int< 12 >::type >::type::apply< church_numeral::Int< 45 >::type >::type >::value == 45 );
 	static_assert( ToInt< church_numeral::Before::apply< church_numeral::Eight >::type >::value == 7, "" );
 	static_assert( ! ToBool< church_numeral::IsZero::apply< church_numeral::Eight >::type >::value, "" );
 	static_assert( ToBool< church_numeral::IsZero::apply< church_numeral::Zero >::type >::value, "" );
@@ -66,7 +66,7 @@ namespace lambda_calculus
 							application
 							<
 								Equal,
-								variable< -1 >
+                                variable< 1 >
 							>,
 							Four
 						>
@@ -80,15 +80,15 @@ namespace lambda_calculus
 						Plus,
 						application
 						<
-							variable< -2 >,
+                            variable< 2 >,
 							application
 							<
 								Next,
-								variable< -1 >
+                                variable< 1 >
 							>
 						>
 					>,
-					variable< -1 >
+                    variable< 1 >
 				>
 			>
 		>

@@ -12,11 +12,11 @@ namespace lambda_calculus
 			<
 				application
 				<
-					variable< -2 >,
+                    variable< 2 >,
 					application
 					<
-						variable< -1 >,
-						variable< -1 >
+                        variable< 1 >,
+                        variable< 1 >
 					>
 				>
 			>,
@@ -24,11 +24,11 @@ namespace lambda_calculus
 			<
 				application
 				<
-					variable< -2 >,
+                    variable< 2 >,
 					application
 					<
-						variable< -1 >,
-						variable< -1 >
+                        variable< 1 >,
+                        variable< 1 >
 					>
 				>
 			>

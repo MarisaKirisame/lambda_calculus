@@ -20,7 +20,7 @@ namespace lambda_calculus
 	{
 		template< int depth, typename t >
 		struct rebound
-		{ typedef typename conditional< -x == depth, t, variable >::type type; };
+        { typedef typename conditional< x == depth, t, variable >::type type; };
 	};
 
 	template< typename x >
@@ -31,7 +31,7 @@ namespace lambda_calculus
 		{ typedef typename x::template rebound< 1, t >::type type; };
 		template< int depth, typename t >
 		struct rebound
-		{ typedef abstraction< typename x::template rebound< depth + 1, t >::type > type; };
+        { typedef abstraction< typename x::template rebound< depth + 1, t >::type > type; };
 	};
 }
 #endif //LAMBDA_CALCULUS

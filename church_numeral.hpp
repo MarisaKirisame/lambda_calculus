@@ -14,15 +14,15 @@ namespace lambda_calculus
 				<
 					application
 					<
-						variable< -2 >,
+                        variable< 2 >,
 						application
 						<
 							application
 							<
-								variable< -3 >,
-								variable< -2 >
+                                variable< 3 >,
+                                variable< 2 >
 							>,
-							variable< -1 >
+                            variable< 1 >
 						>
 					>
 				>
@@ -42,7 +42,7 @@ namespace lambda_calculus
 		typedef Next::apply< Ten >::type Eleven;
 		typedef Next::apply< Eleven >::type Twelve;
 		template< unsigned int i >
-		struct Int { typedef typename Next::apply< typename Int< i - 1 >::type >::type type; };
+        struct Int { typedef typename Next::apply< typename Int< i - 1 >::type >::type type; };
 		template< > struct Int< 0 > { typedef Zero type; };
 		typedef
 		abstraction
@@ -57,17 +57,17 @@ namespace lambda_calculus
 						<
 							application
 							<
-								variable< -4 >,
-								variable< -2 >
+                                variable< 4 >,
+                                variable< 2 >
 							>,
 							application
 							<
 								application
 								<
-									variable< -3 >,
-									variable< -2 >
+                                    variable< 3 >,
+                                    variable< 2 >
 								>,
-								variable< -1 >
+                                variable< 1 >
 							>
 						>
 					>
@@ -83,11 +83,11 @@ namespace lambda_calculus
 				<
 					application
 					<
-						variable< -2 >,
+                        variable< 2 >,
 						application
 						<
 							Plus,
-							variable< -1 >
+                            variable< 1 >
 						>
 					>,
 					Zero
@@ -107,18 +107,18 @@ namespace lambda_calculus
 						<
 							application
 							<
-								variable< -3 >,
+                                variable< 3 >,
 								abstraction
 								<
 									abstraction
 									<
 										application
 										<
-											variable< -1 >,
+                                            variable< 1 >,
 											application
 											<
-												variable< -2 >,
-												variable< -4 >
+                                                variable< 2 >,
+                                                variable< 4 >
 											>
 										>
 									>
@@ -126,12 +126,12 @@ namespace lambda_calculus
 							>,
 							abstraction
 							<
-								variable< -2 >
+                                variable< 2 >
 							>
 						>,
 						abstraction
 						<
-							variable< -1 >
+                            variable< 1 >
 						>
 					>
 				>
@@ -146,10 +146,10 @@ namespace lambda_calculus
 				<
 					application
 					<
-						variable< -1 >,
+                        variable< 1 >,
 						Before
 					>,
-					variable< -2 >
+                    variable< 2 >
 				>
 			>
 		> Minus;
@@ -160,8 +160,8 @@ namespace lambda_calculus
 			<
 				application
 				<
-					variable< -1 >,
-					variable< -2 >
+                    variable< 1 >,
+                    variable< 2 >
 				>
 			>
 		> Power;
@@ -175,7 +175,7 @@ namespace lambda_calculus
 				<
 					application
 					<
-						variable< -1 >,
+                        variable< 1 >,
 						application
 						<
 							Or,
@@ -202,9 +202,9 @@ namespace lambda_calculus
 							application
 							<
 								Minus,
-								variable< -2 >
+                                variable< 2 >
 							>,
-							variable< -1 >
+                            variable< 1 >
 						>
 					>
 				>
@@ -226,9 +226,9 @@ namespace lambda_calculus
 							application
 							<
 								Minus,
-								variable< -1 >
+                                variable< 1 >
 							>,
-							variable< -2 >
+                            variable< 2 >
 						>
 					>
 				>
@@ -252,9 +252,9 @@ namespace lambda_calculus
 								application
 								<
 									Larger,
-									variable< -2 >
+                                    variable< 2 >
 								>,
-								variable< -1 >
+                                variable< 1 >
 							>
 						>
 					>,
@@ -266,9 +266,9 @@ namespace lambda_calculus
 							application
 							<
 								Smaller,
-								variable< -2 >
+                                variable< 2 >
 							>,
-							variable< -1 >
+                            variable< 1 >
 						>
 					>
 				>

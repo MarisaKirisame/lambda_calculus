@@ -15,10 +15,10 @@ namespace lambda_calculus
 				<
 					application
 					<
-						variable< -1 >,
-						variable< -3 >
+                        variable< 1 >,
+                        variable< 3 >
 					>,
-					variable< -2 >
+                    variable< 2 >
 				>
 			>
 		>
@@ -28,7 +28,7 @@ namespace lambda_calculus
 	<
 		application
 		<
-			variable< -1 >,
+            variable< 1 >,
 			True
 		>
 	> First;
@@ -37,7 +37,7 @@ namespace lambda_calculus
 	<
 		application
 		<
-			variable< -1 >,
+            variable< 1 >,
 			False
 		>
 	> Second;

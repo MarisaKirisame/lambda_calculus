@@ -18,20 +18,20 @@ namespace lambda_calculus
 					<
 						application
 						<
-							variable< -3 >,
-							variable< -1 >
+                            variable< 3 >,
+                            variable< 1 >
 						>,
 						application
 						<
-							variable< -2 >,
-							variable< -1 >
+                            variable< 2 >,
+                            variable< 1 >
 						>
 					>
 				>
 			>
 		> S;
 		typedef True K;
-		typedef abstraction< variable< -1 > > I;
+        typedef abstraction< variable< 1 > > I;
 		typedef
 		boost::mpl::map
 		<

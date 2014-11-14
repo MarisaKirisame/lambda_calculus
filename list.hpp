@@ -9,7 +9,7 @@ namespace lambda_calculus
 	<
 		application
 		<
-			variable< -1 >,
+            variable< 1 >,
 			abstraction
 			<
 				abstraction< False >

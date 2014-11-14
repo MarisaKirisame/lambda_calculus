@@ -8,7 +8,7 @@ namespace lambda_calculus
 	<
 		abstraction
 		<
-			variable< -2 >
+            variable< 2 >
 		>
 	> True;
 	typedef
@@ -16,7 +16,7 @@ namespace lambda_calculus
 	<
 		abstraction
 		<
-			variable< -1 >
+            variable< 1 >
 		>
 	> False;
 	typedef
@@ -28,10 +28,10 @@ namespace lambda_calculus
 			<
 				application
 				<
-					variable< -2 >,
-					variable< -1 >
+                    variable< 2 >,
+                    variable< 1 >
 				>,
-				variable< -2 >
+                variable< 2 >
 			>
 		>
 	> And;
@@ -44,10 +44,10 @@ namespace lambda_calculus
 			<
 				application
 				<
-					variable< -2 >,
-					variable< -2 >
+                    variable< 2 >,
+                    variable< 2 >
 				>,
-				variable< -1 >
+                variable< 1 >
 			>
 		>
 	> Or;
@@ -62,10 +62,10 @@ namespace lambda_calculus
 				<
 					application
 					<
-						variable< -3 >,
-						variable< -1 >
+                        variable< 3 >,
+                        variable< 1 >
 					>,
-					variable< -2 >
+                    variable< 2 >
 				>
 			>
 		>
@@ -81,10 +81,10 @@ namespace lambda_calculus
 				<
 					application
 					<
-						variable< -3 >,
-						variable< -2 >
+                        variable< 3 >,
+                        variable< 2 >
 					>,
-					variable< -1 >
+                    variable< 1 >
 				>
 			>
 		>
@@ -104,7 +104,8 @@ namespace lambda_calculus
 	template< typename t >
 	struct ToBool
 	{
-		static constexpr bool value = ToBool< typename t::template apply< True >::type::template apply< False >::type >::value;
+        static constexpr bool value =
+                ToBool< typename t::template apply< True >::type::template apply< False >::type >::value;
 	};
 }
 #endif //LAMBDA_CALCULUS_PROPOSITIONAL_LOGIC
