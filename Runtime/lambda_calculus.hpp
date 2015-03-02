@@ -7,9 +7,17 @@ namespace Runtime_lambda_calculus
 {
     struct expression : std::enable_shared_from_this< expression >
     {
-        struct abstraction { std::shared_ptr< const expression > abs; };
+        struct abstraction
+        {
+            std::shared_ptr< const expression > abs;
+            abstraction( const std::shared_ptr< const expression > & abs ) : abs( abs ) { }
+        };
         struct index { size_t i; };
-        struct application { std::shared_ptr< const expression > fst, snd; };
+        struct application
+        {
+            std::shared_ptr< const expression > fst, snd;
+            application( const std::shared_ptr< const expression > & fst, const std::shared_ptr< const expression > & snd ) : fst( fst ), snd( snd ) { }
+        };
         boost::variant< abstraction, index, application > v;
         expression( const abstraction & abs ) : v( abs ) { }
         expression( const index & i ) : v( i ) { }
@@ -32,18 +40,17 @@ namespace Runtime_lambda_calculus
             {
                 const expression & exp;
                 substitute_visitor( const expression & exp ) : exp( exp ) { }
-                std::shared_ptr< const expression > operator( )( const abstraction & abs ) const { return std::make_shared< expression >( abs ); }
+                std::shared_ptr< const expression > operator( )( const abstraction & abs ) const
+                { return std::make_shared< const expression >( abstraction( abs.abs->substitute( exp ) ) ); }
                 std::shared_ptr< const expression > operator( )( const application & app ) const
-                {
-
-                }
+                { return std::make_shared< const expression >( application( app.fst->substitute( exp ), app.snd->substitute( exp ) ) ); }
                 std::shared_ptr< const expression > operator( )( const index & i ) const
                 { return i.i == 1 ? std::make_shared< const expression >( i ) : exp.shared_from_this( ); }
             };
             substitute_visitor sv { exp };
             return v.apply_visitor( sv );
         }
-        bool operator == ( const expression & cmp ) const //it is impossible to decide semantically, so this decide if two expression are structrually equally
+        bool operator == ( const expression & cmp ) const //it is impossible to decide semantically, so this decide if two expression are structrually equal
         {
             struct equal_visitor_out : boost::static_visitor< bool >
             {
