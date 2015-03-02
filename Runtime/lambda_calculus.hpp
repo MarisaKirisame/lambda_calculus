@@ -5,15 +5,23 @@
 #include <boost/variant.hpp>
 namespace Runtime_lambda_calculus
 {
+    struct expression;
+    std::shared_ptr< const expression > ind( size_t i );
+    std::shared_ptr< const expression > abs( const std::shared_ptr< const expression > & exp );
+    std::shared_ptr< const expression > app( const std::shared_ptr< const expression > & fst, const std::shared_ptr< const expression > & snd );
     struct expression : std::enable_shared_from_this< expression >
     {
         struct abstraction
         {
             std::shared_ptr< const expression > abs;
             abstraction( const std::shared_ptr< const expression > & abs ) : abs( abs ) { }
-            expression apply( const expression & exp ) { return abs->substitute( 1, exp ); }
+            std::shared_ptr< const expression > apply( const expression & exp ) { return abs->substitute( 1, exp ); }
         };
-        struct index { size_t i; };
+        struct index
+        {
+            size_t i;
+            index( size_t i ) : i( i ) { }
+        };
         struct application
         {
             std::shared_ptr< const expression > fst, snd;
@@ -35,19 +43,19 @@ namespace Runtime_lambda_calculus
             string_visitor sv;
             return v.apply_visitor( sv );
         }
-        expression substitute( size_t i, const expression & exp ) const
+        std::shared_ptr< const expression > substitute( size_t i, const expression & exp ) const
         {
-            struct substitute_visitor : boost::static_visitor< expression >
+            struct substitute_visitor : boost::static_visitor< std::shared_ptr< const expression > >
             {
                 size_t i;
                 const expression & exp;
                 substitute_visitor( size_t i, const expression & exp ) : i( i ), exp( exp ) { }
-                expression operator( )( const abstraction & abs ) const
-                { return abstraction( abs.abs->substitute( i + 1, exp ).shared_from_this( ) ); }
-                expression operator( )( const application & app ) const
-                { return application( app.fst->substitute( i, exp ).shared_from_this( ), app.snd->substitute( i, exp ).shared_from_this( ) ); }
-                expression operator( )( const index & i ) const
-                { return i.i == this->i ? i : exp; }
+                std::shared_ptr< const expression > operator( )( const abstraction & abs ) const
+                { return Runtime_lambda_calculus::abs( abs.abs->substitute( i + 1, exp ) ); }
+                std::shared_ptr< const expression > operator( )( const application & app ) const
+                { return Runtime_lambda_calculus::app( app.fst->substitute( i, exp ), app.snd->substitute( i, exp ) ); }
+                std::shared_ptr< const expression > operator( )( const index & i ) const
+                { return i.i == this->i ? ind( i.i ) : exp.shared_from_this( ); }
             };
             substitute_visitor sv { i, exp };
             return v.apply_visitor( sv );
@@ -108,24 +116,30 @@ namespace Runtime_lambda_calculus
             struct eval_abstraction_visitor : boost::static_visitor< abstraction >
             {
                 abstraction operator( )( const abstraction & abs ) const { return abs; }
-                abstraction operator( )( const application & app ) const { return app.fst->eval_abstraction( ).apply( app ).eval_abstraction( ); }
+                abstraction operator( )( const application & app ) const { return app.fst->eval_abstraction( ).apply( app )->eval_abstraction( ); }
                 std::shared_ptr< const expression > operator( )( const index & ) const { throw std::runtime_error( "unexpected index" ); }
             };
             eval_abstraction_visitor eav;
             return v.apply_visitor( eav );
         }
-        expression eval_step( ) const
+        std::shared_ptr< const expression > eval_step( ) const
         {
-            struct eval_step_visitor : boost::static_visitor< expression >
+            struct eval_step_visitor : boost::static_visitor< std::shared_ptr< const expression > >
             {
-                expression operator( )( const abstraction & abs ) const { return abs; }
-                expression operator( )( const application & app ) const
-                { return app.fst->eval_abstraction( ).apply( *app.snd ); }
-                expression operator( )( const index & ) const { throw std::runtime_error( "unexpected index" ); }
+                std::shared_ptr< const expression > operator( )( const abstraction & abs ) const
+                { return std::make_shared< const expression >( abs ); }
+                std::shared_ptr< const expression > operator( )( const application & app ) const
+                { return std::make_shared< const expression >( app.fst->eval_abstraction( ).apply( *app.snd ) ); }
+                std::shared_ptr< const expression > operator( )( const index & ) const { throw std::runtime_error( "unexpected index" ); }
             };
             eval_step_visitor esv;
             return v.apply_visitor( esv );
         }
     };
+    std::shared_ptr< const expression > ind( size_t i ) { return std::make_shared< expression >( expression::index( i ) ); }
+    std::shared_ptr< const expression > abs( const std::shared_ptr< const expression > & exp )
+    { return std::make_shared< const expression >( expression::abstraction( exp ) ); }
+    std::shared_ptr< const expression > app( const std::shared_ptr< const expression > & fst, const std::shared_ptr< const expression > & snd )
+    { return std::make_shared< const expression >( expression::application( fst, snd ) ); }
 }
 #endif
