@@ -1,7 +1,7 @@
-#ifndef LAMBDA_CALCULUS_PROPOSITIONAL_LOGIC
-#define LAMBDA_CALCULUS_PROPOSITIONAL_LOGIC
+#ifndef lambda_calculus_CompileTime_PROPOSITIONAL_LOGIC
+#define lambda_calculus_CompileTime_PROPOSITIONAL_LOGIC
 #include "lambda_calculus.hpp"
-namespace lambda_calculus
+namespace CompileTime_lambda_calculus
 {
     typedef
     abstraction
@@ -108,4 +108,4 @@ namespace lambda_calculus
                 ToBool< typename t::template apply< True >::type::template apply< False >::type >::value;
     };
 }
-#endif //LAMBDA_CALCULUS_PROPOSITIONAL_LOGIC
+#endif //lambda_calculus_CompileTime_PROPOSITIONAL_LOGIC

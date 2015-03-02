@@ -1,7 +1,8 @@
-#ifndef LAMBDA_CALCULUS_LIST
-#define LAMBDA_CALCULUS_LIST
+#ifndef lambda_calculus_CompileTime_LIST
+#define lambda_calculus_CompileTime_LIST
 #include "propositional_logic.hpp"
-namespace lambda_calculus
+#include "lambda_calculus.hpp"
+namespace CompileTime_lambda_calculus
 {
     typedef abstraction< True > Nil;
     typedef
@@ -17,4 +18,4 @@ namespace lambda_calculus
         >
     > Null;
 }
-#endif //LAMBDA_CALCULUS_LIST
+#endif //lambda_calculus_CompileTime_LIST

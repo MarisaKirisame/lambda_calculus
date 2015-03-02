@@ -1,11 +1,11 @@
-#ifndef LAMBDA_CALCULUS_BCKW_SYSTEM
-#define LAMBDA_CALCULUS_BCKW_SYSTEM
+#ifndef lambda_calculus_CompileTime_BCKW_SYSTEM
+#define lambda_calculus_CompileTime_BCKW_SYSTEM
 #include "lambda_calculus.hpp"
 #include "SKI_combinator_calculus.hpp"
 #include "boost/mpl/char.hpp"
 #include "boost/mpl/map.hpp"
 #include "parser.hpp"
-namespace lambda_calculus
+namespace CompileTime_lambda_calculus
 {
     namespace BCKW_combinator_logic
     {
@@ -75,4 +75,4 @@ namespace lambda_calculus
         typedef typename parser::parser_generator::apply< BCKW_map >::type BCKW_parser;
     }
 }
-#endif //LAMBDA_CALCULUS_BCKW_SYSTEM
+#endif //lambda_calculus_CompileTime_BCKW_SYSTEM

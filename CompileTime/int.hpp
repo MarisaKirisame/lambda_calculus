@@ -1,7 +1,8 @@
-#ifndef LAMBDA_CALCULUS_INT
-#define LAMBDA_CALCULUS_INT
+#ifndef lambda_calculus_CompileTime_INT
+#define lambda_calculus_CompileTime_INT
 #include "propositional_logic.hpp"
-namespace lambda_calculus
+#include "lambda_calculus.hpp"
+namespace CompileTime_lambda_calculus
 {
 
     typedef
@@ -145,4 +146,4 @@ namespace lambda_calculus
         static constexpr int value = rem_application< typename x::template apply< accumulate >::value::template apply< num< 0 > >::value >::value::count;
     };
 }
-#endif //LAMBDA_CALCULUS_INT
+#endif //lambda_calculus_CompileTime_INT

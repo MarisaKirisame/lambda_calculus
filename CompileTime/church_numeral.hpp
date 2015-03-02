@@ -1,7 +1,8 @@
-#ifndef LAMBDA_CALCULUS_CHURCH_NUMERAL
-#define LAMBDA_CALCULUS_CHURCH_NUMERAL
+#ifndef lambda_calculus_CompileTime_CHURCH_NUMERAL
+#define lambda_calculus_CompileTime_CHURCH_NUMERAL
 #include "propositional_logic.hpp"
-namespace lambda_calculus
+#include "lambda_calculus.hpp"
+namespace CompileTime_lambda_calculus
 {
     namespace church_numeral
     {
@@ -317,4 +318,4 @@ namespace lambda_calculus
         };
     }
 }
-#endif //LAMBDA_CALCULUS_CHURCH_NUMERAL
+#endif //lambda_calculus_CompileTime_CHURCH_NUMERAL

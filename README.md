@@ -1,6 +1,6 @@
-lambda_calculus
+CompileTime_lambda_calculus
 ===================
-A lambda_calculus library all written using Template Metaprogramming.
+A CompileTime_lambda_calculus library all written using Template Metaprogramming.
 
 Feature:
 ===================

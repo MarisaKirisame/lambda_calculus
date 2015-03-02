@@ -1,5 +1,5 @@
-#ifndef LAMBDA_CALCULUS_EXAMPLE
-#define LAMBDA_CALCULUS_EXAMPLE
+#ifndef lambda_calculus_CompileTime_EXAMPLE
+#define lambda_calculus_CompileTime_EXAMPLE
 #include "type_traits"
 #include "boost/mpl/same_as.hpp"
 #include "boost/mpl/string.hpp"
@@ -14,7 +14,7 @@
 #include "Iota.hpp"
 #include "Y_combinator.hpp"
 #include <iostream>
-namespace lambda_calculus
+namespace CompileTime_lambda_calculus
 {
     using namespace SKI_combinator_logic;
     using namespace church_numeral;
@@ -95,4 +95,4 @@ namespace lambda_calculus
     >recursive_test;
     static_assert( ToInt< Y::apply< recursive_test >::type::apply< One >::type >::value == 10 , "" );
 }
-#endif //LAMBDA_CALCULUS_EXAMPLE
+#endif //lambda_calculus_CompileTime_EXAMPLE

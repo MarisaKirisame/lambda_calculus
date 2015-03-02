@@ -1,11 +1,12 @@
-#ifndef LAMBDA_CALCULUS_IOTA
-#define LAMBDA_CALCULUS_IOTA
+#ifndef lambda_calculus_CompileTime_IOTA
+#define lambda_calculus_CompileTime_IOTA
 #include "SKI_combinator_calculus.hpp"
 #include "parser.hpp"
 #include "boost/mpl/map.hpp"
 #include "boost/mpl/pair.hpp"
 #include "boost/mpl/char.hpp"
-namespace lambda_calculus
+#include "lambda_calculus.hpp"
+namespace CompileTime_lambda_calculus
 {
     namespace Iota_combinator_logic
     {
@@ -26,4 +27,4 @@ namespace lambda_calculus
         typedef typename parser::parser_generator::apply< Iota_map >::type Iota_parser;
     }
 }
-#endif //LAMBDA_CALCULUS_IOTA
+#endif //lambda_calculus_CompileTime_IOTA
