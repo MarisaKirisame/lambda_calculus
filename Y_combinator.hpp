@@ -3,36 +3,36 @@
 #include "lambda_calculus.hpp"
 namespace lambda_calculus
 {
-	typedef
-	abstraction
-	<
-		application
-		<
-			abstraction
-			<
-				application
-				<
+    typedef
+    abstraction
+    <
+        application
+        <
+            abstraction
+            <
+                application
+                <
                     variable< 2 >,
-					application
-					<
+                    application
+                    <
                         variable< 1 >,
                         variable< 1 >
-					>
-				>
-			>,
-			abstraction
-			<
-				application
-				<
+                    >
+                >
+            >,
+            abstraction
+            <
+                application
+                <
                     variable< 2 >,
-					application
-					<
+                    application
+                    <
                         variable< 1 >,
                         variable< 1 >
-					>
-				>
-			>
-		>
-	> Y;
+                    >
+                >
+            >
+        >
+    > Y;
 }
 #endif //LAMBDA_CALCULUS_Y_COMBINATOR

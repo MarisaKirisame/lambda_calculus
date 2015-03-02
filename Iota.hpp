@@ -7,8 +7,8 @@
 #include "boost/mpl/char.hpp"
 namespace lambda_calculus
 {
-	namespace Iota_combinator_logic
-	{
+    namespace Iota_combinator_logic
+    {
         typedef
             abstraction
             <
@@ -22,8 +22,8 @@ namespace lambda_calculus
                     SKI_combinator_logic::K
                 >
             > U;
-		typedef boost::mpl::map< boost::mpl::pair< boost::mpl::char_< 'U' >, U > > Iota_map;
-		typedef typename parser::parser_generator::apply< Iota_map >::type Iota_parser;
-	}
+        typedef boost::mpl::map< boost::mpl::pair< boost::mpl::char_< 'U' >, U > > Iota_map;
+        typedef typename parser::parser_generator::apply< Iota_map >::type Iota_parser;
+    }
 }
 #endif //LAMBDA_CALCULUS_IOTA
