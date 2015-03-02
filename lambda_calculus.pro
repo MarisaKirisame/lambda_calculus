@@ -10,16 +10,17 @@ OTHER_FILES += \
     README.md
 
 HEADERS += \
-    CompileTime/BCKW_system.hpp \
-    CompileTime/church_numeral.hpp \
-    CompileTime/example.hpp \
-    CompileTime/int.hpp \
-    CompileTime/Iota.hpp \
-    CompileTime/CompileTime_lambda_calculus.hpp \
-    CompileTime/list.hpp \
-    CompileTime/pair.hpp \
-    CompileTime/parser.hpp \
-    CompileTime/propositional_logic.hpp \
-    CompileTime/SKI_combinator_calculus.hpp \
-    CompileTime/Y_combinator.hpp \
-    RunTime/CompileTime_lambda_calculus.hpp
+    RunTime/lambda_calculus.hpp \
+    Compiletime/BCKW_system.hpp \
+    Compiletime/church_numeral.hpp \
+    Compiletime/example.hpp \
+    Compiletime/int.hpp \
+    Compiletime/Iota.hpp \
+    Compiletime/lambda_calculus.hpp \
+    Compiletime/list.hpp \
+    Compiletime/pair.hpp \
+    Compiletime/parser.hpp \
+    Compiletime/propositional_logic.hpp \
+    Compiletime/SKI_combinator_calculus.hpp \
+    Compiletime/Y_combinator.hpp \
+    Runtime/lambda_calculus.hpp

@@ -1,7 +1,7 @@
-#ifndef CompileTime_lambda_calculus
-#define CompileTime_lambda_calculus
+#ifndef Compiletime_lambda_calculus
+#define Compiletime_lambda_calculus
 #include <type_traits>
-namespace CompileTime_lambda_calculus
+namespace Compiletime_lambda_calculus
 {
     using namespace std;
     template< typename x, typename y >
@@ -34,4 +34,4 @@ namespace CompileTime_lambda_calculus
         { typedef abstraction< typename x::template rebound< depth + 1, t >::type > type; };
     };
 }
-#endif //CompileTime_lambda_calculus
+#endif //Compiletime_lambda_calculus

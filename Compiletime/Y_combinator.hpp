@@ -1,7 +1,7 @@
-#ifndef lambda_calculus_CompileTime_Y_COMBINATOR
-#define lambda_calculus_CompileTime_Y_COMBINATOR
+#ifndef lambda_calculus_Compiletime_Y_COMBINATOR
+#define lambda_calculus_Compiletime_Y_COMBINATOR
 #include "lambda_calculus.hpp"
-namespace CompileTime_lambda_calculus
+namespace Compiletime_lambda_calculus
 {
     typedef
     abstraction
@@ -35,4 +35,4 @@ namespace CompileTime_lambda_calculus
         >
     > Y;
 }
-#endif //lambda_calculus_CompileTime_Y_COMBINATOR
+#endif //lambda_calculus_Compiletime_Y_COMBINATOR

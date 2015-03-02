@@ -1,8 +1,8 @@
-#ifndef lambda_calculus_CompileTime_PAIR
-#define lambda_calculus_CompileTime_PAIR
+#ifndef lambda_calculus_Compiletime_PAIR
+#define lambda_calculus_Compiletime_PAIR
 #include "lambda_calculus.hpp"
 #include "propositional_logic.hpp"
-namespace CompileTime_lambda_calculus
+namespace Compiletime_lambda_calculus
 {
     typedef
     abstraction
@@ -42,4 +42,4 @@ namespace CompileTime_lambda_calculus
         >
     > Second;
 }
-#endif //lambda_calculus_CompileTime_PAIR
+#endif //lambda_calculus_Compiletime_PAIR

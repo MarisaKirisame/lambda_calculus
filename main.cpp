@@ -1,3 +1,3 @@
-#include "CompileTime/example.hpp"
-#include "RunTime/lambda_calculus.hpp"
+#include "Compiletime/example.hpp"
+#include "Runtime/lambda_calculus.hpp"
 int main( ) { }

@@ -1,5 +1,5 @@
-#ifndef lambda_calculus_CompileTime_PARSER
-#define lambda_calculus_CompileTime_PARSER
+#ifndef lambda_calculus_Compiletime_PARSER
+#define lambda_calculus_Compiletime_PARSER
 #include "boost/mpl/insert.hpp"
 #include "boost/mpl/vector.hpp"
 #include "boost/mpl/count.hpp"
@@ -21,7 +21,7 @@
 #include "boost/mpl/back_inserter.hpp"
 #include "boost/mpl/transform.hpp"
 #include "boost/mpl/for_each.hpp"
-namespace CompileTime_lambda_calculus
+namespace Compiletime_lambda_calculus
 {
     namespace parser
     {
@@ -127,4 +127,4 @@ namespace CompileTime_lambda_calculus
         };
     }
 }
-#endif //lambda_calculus_CompileTime_PARSER
+#endif //lambda_calculus_Compiletime_PARSER

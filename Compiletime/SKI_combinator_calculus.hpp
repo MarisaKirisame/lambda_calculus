@@ -1,9 +1,9 @@
-#ifndef lambda_calculus_CompileTime_SKI_COMBINATOR_CALCULUS
-#define lambda_calculus_CompileTime_SKI_COMBINATOR_CALCULUS
+#ifndef lambda_calculus_Compiletime_SKI_COMBINATOR_CALCULUS
+#define lambda_calculus_Compiletime_SKI_COMBINATOR_CALCULUS
 #include "lambda_calculus.hpp"
 #include "propositional_logic.hpp"
 #include "parser.hpp"
-namespace CompileTime_lambda_calculus
+namespace Compiletime_lambda_calculus
 {
     namespace SKI_combinator_logic
     {
@@ -42,4 +42,4 @@ namespace CompileTime_lambda_calculus
         typedef typename parser::parser_generator::apply< SKI_map >::type SKI_parser;
     }
 }
-#endif //lambda_calculus_CompileTime_SKI_COMBINATOR_CALCULUS
+#endif //lambda_calculus_Compiletime_SKI_COMBINATOR_CALCULUS
