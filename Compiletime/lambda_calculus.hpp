@@ -1,5 +1,5 @@
-#ifndef Compiletime_lambda_calculus
-#define Compiletime_lambda_calculus
+#ifndef lambda_calculus_Compiletime_lambda_calculus
+#define lambda_calculus_Compiletime_lambda_calculus
 #include <type_traits>
 namespace Compiletime_lambda_calculus
 {
@@ -15,7 +15,7 @@ namespace Compiletime_lambda_calculus
         { typedef application< typename x::template rebound< depth, t >::type, typename y::template rebound< depth, t >::type > type; };
     };
 
-    template< int x >
+    template< size_t x >
     struct variable
     {
         template< int depth, typename t >
@@ -34,4 +34,4 @@ namespace Compiletime_lambda_calculus
         { typedef abstraction< typename x::template rebound< depth + 1, t >::type > type; };
     };
 }
-#endif //Compiletime_lambda_calculus
+#endif //lambda_calculus_Compiletime_lambda_calculus

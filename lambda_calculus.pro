@@ -23,4 +23,5 @@ HEADERS += \
     Compiletime/propositional_logic.hpp \
     Compiletime/SKI_combinator_calculus.hpp \
     Compiletime/Y_combinator.hpp \
-    Runtime/lambda_calculus.hpp
+    Runtime/lambda_calculus.hpp \
+    Runtime/Compiletime_Runtime.hpp
