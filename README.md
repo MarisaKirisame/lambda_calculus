@@ -1,17 +1,19 @@
-Compiletime_lambda_calculus
+lambda_calculus
 ===================
-A Compiletime_lambda_calculus library all written using Template Metaprogramming.
+A lambda_calculus library with various feature.
 
 Feature:
 ===================
- - A praser generator that can generate praser that can prase certain Combinatory Logic code
- - Prasers of BCKW and Iota using praser generator
- - Church Numeral
+ - A praser generator that can generate praser that can prase certain Combinatory Logic code (TMP)
+ - Prasers of BCKW and Iota using praser generator (TMP)
+ - Church Numeral (TMP)
  - Church Numeral and Boolean logic Interface to C++ TMP code
- - Propositional logic
- - combinator calculus
- - Data Structure such as list and pair
- - The Y combinator
+ - Propositional logic (TMP)
+ - combinator calculus (TMP)
+ - Data Structure such as list and pair (TMP)
+ - The Y combinator (TMP)
+ - Ability to convert TMP lambda calculus code into Runtime lambda calculus object.
+ - Printing, Sorting and Testing for equality of Runtime lambda calculus object.
 
 Build and Dependency:
 ===================
