@@ -49,7 +49,20 @@ namespace Compiletime_lambda_calculus
                     struct apply { typedef typename t::first type; };
                 };
                 typedef typename
-                boost::mpl::transform< MAP, select_first, boost::mpl::inserter< init_valid_token, boost::mpl::insert< boost::mpl::arg< 1 >, boost::mpl::arg< 2 > > > >::type valid_token;
+                boost::mpl::transform
+                <
+                    MAP,
+                    select_first,
+                    boost::mpl::inserter
+                    <
+                        init_valid_token,
+                        boost::mpl::insert
+                        <
+                            boost::mpl::arg< 1 >,
+                            boost::mpl::arg< 2 >
+                        >
+                    >
+                >::type valid_token;
                 template< typename str, bool b = boost::mpl::empty< str >::value >
                 struct ignore_invalid;
                 template< typename str >

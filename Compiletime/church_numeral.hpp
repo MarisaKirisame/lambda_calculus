@@ -284,21 +284,16 @@ namespace Compiletime_lambda_calculus
                 static constexpr int count = n;
                 template< typename y >
                 struct apply
-                {
-                    typedef num type;
-                };
+                { typedef num type; };
                 template< int depth, typename t >
                 struct rebound
-                {
-                    typedef num< n > type;
-                };
+                { typedef num< n > type; };
+                template< size_t l, size_t r >
+                struct update { typedef num type; };
             };
 
-            template< int depth, typename t >
-            struct rebound
-            {
-                typedef ToInt< typename x::template rebound< depth, t >::type > type;
-            };
+            template< size_t depth, typename t >
+            struct rebound { typedef ToInt< typename x::template rebound< depth, t >::type > type; };
 
             template< typename a >
             struct rem_application { typedef a type; };
@@ -311,8 +306,10 @@ namespace Compiletime_lambda_calculus
                 static constexpr int value = 0;
                 template< typename y >
                 struct apply { typedef num< rem_application< y >::type::count + 1 > type; };
-                template< int d, typename i >
+                template< size_t d, typename i >
                 struct rebound { typedef accumulate type; };
+                template< size_t l, size_t r >
+                struct update { typedef accumulate type; };
             };
             static constexpr int value = rem_application< typename x::template apply< accumulate >::type::template apply< num< 0 > >::type >::type::count;
         };

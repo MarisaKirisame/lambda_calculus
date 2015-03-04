@@ -13,15 +13,15 @@ namespace Compiletime_lambda_calculus
             <
                 application
                 <
-                    variable< -2 >,
+                    variable< 2 >,
                     application
                     <
                         application
                         <
-                            variable< -3 >,
-                            variable< -2 >
+                            variable< 3 >,
+                            variable< 2 >
                         >,
-                        variable< -1 >
+                        variable< 1 >
                     >
                 >
             >
@@ -53,17 +53,17 @@ namespace Compiletime_lambda_calculus
                     <
                         application
                         <
-                            variable< -4 >,
-                            variable< -2 >
+                            variable< 4 >,
+                            variable< 2 >
                         >,
                         application
                         <
                             application
                             <
-                                variable< -3 >,
-                                variable< -2 >
+                                variable< 3 >,
+                                variable< 2 >
                             >,
-                            variable< -1 >
+                            variable< 1 >
                         >
                     >
                 >
@@ -79,11 +79,11 @@ namespace Compiletime_lambda_calculus
             <
                 application
                 <
-                    variable< -2 >,
+                    variable< 2 >,
                     application
                     <
                         Plus,
-                        variable< -1 >
+                        variable< 1 >
                     >
                 >,
                 Zero
@@ -97,8 +97,8 @@ namespace Compiletime_lambda_calculus
         <
             application
             <
-                variable< -1 >,
-                variable< -2 >
+                variable< 1 >,
+                variable< 2 >
             >
         >
     > Power;
@@ -132,16 +132,14 @@ namespace Compiletime_lambda_calculus
         {
             static constexpr int value = 0;
             template< typename y >
-            struct apply
-            {
-                typedef num< rem_application< y >::value::count + 1 > value;
-            };
+            struct apply { typedef num< rem_application< y >::value::count + 1 > value; };
             template< int d, typename i >
-            struct rebound
-            {
-                typedef accumulate value;
-            };
+            struct rebound { typedef accumulate value; };
+            template < size_t l, size_t r >
+            struct update< l, r > { typedef accumulate type; };
         };
+        template < size_t l, size_t r >
+        struct update< l, r > { typedef ToInt< x > type; };
         static constexpr int value = rem_application< typename x::template apply< accumulate >::value::template apply< num< 0 > >::value >::value::count;
     };
 }
