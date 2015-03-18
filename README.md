@@ -4,8 +4,8 @@ A lambda_calculus library with various feature.
 
 Feature:
 ===================
- - A praser generator that can generate praser that can prase certain Combinatory Logic code (TMP)
- - Prasers of BCKW and Iota using praser generator (TMP)
+ - A praser generator that can generate parser that can parse certain Combinatory Logic code (TMP)
+ - Parsers of BCKW and Iota using parser generator (TMP)
  - Church Numeral (TMP)
  - Church Numeral and Boolean logic Interface to C++ TMP code
  - Propositional logic (TMP)
