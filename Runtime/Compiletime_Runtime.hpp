@@ -10,22 +10,22 @@ namespace Runtime_lambda_calculus
     template< typename fst, typename snd >
     struct Compiletime_Runtime_converter< Compiletime_lambda_calculus::application< fst, snd > >
     {
-        std::shared_ptr< const expression > operator ( )( ) const
-        { return app( Compiletime_Runtime_converter< fst >( )( ), Compiletime_Runtime_converter< snd >( )( ) ); }
+        exp operator ( )( ) const
+        { return app< >( Compiletime_Runtime_converter< fst >( )( ), Compiletime_Runtime_converter< snd >( )( ) ); }
     };
 
     template< typename abst >
     struct Compiletime_Runtime_converter< Compiletime_lambda_calculus::abstraction< abst > >
     {
-        std::shared_ptr< const expression > operator ( )( ) const
-        { return abs( Compiletime_Runtime_converter< abst >( )( ) ); }
+        exp operator ( )( ) const
+        { return abs< >( Compiletime_Runtime_converter< abst >( )( ) ); }
     };
 
     template< size_t i >
     struct Compiletime_Runtime_converter< Compiletime_lambda_calculus::variable< i > >
     {
-        std::shared_ptr< const expression > operator ( )( ) const
-        { return var( i ); }
+        exp operator ( )( ) const
+        { return var< >( i ); }
     };
 }
 #endif //lambda_calculus_Runtime_Compiletime_Runtime

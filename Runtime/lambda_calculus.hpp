@@ -6,14 +6,15 @@
 #include <boost/optional/optional.hpp>
 #include <utility>
 #include <map>
+#include <../algebraic_data_type/algebraic_data_type.hpp>
 namespace Runtime_lambda_calculus
 {
-    struct expression;
-    std::shared_ptr< const expression > var( size_t i );
-    std::shared_ptr< const expression > abs( const std::shared_ptr< const expression > & exp );
-    std::shared_ptr< const expression > app(
-            const std::shared_ptr< const expression > & fst,
-            const std::shared_ptr< const expression > & snd );
+    using namespace algebraic_data_type;
+    typedef algebraic_data_type< size_t, recursive_indicator, std::pair< recursive_indicator, recursive_indicator > > exp;
+    DECLARE_CONSTRUCTOR( exp, 0, var, T );
+    DECLARE_CONSTRUCTOR( exp, 1, abs, T );
+    DECLARE_CONSTRUCTOR( exp, 2, app, T );
+
     template< typename INIT, typename FUNCTION, typename FIRST >
     auto pack_fold_l( const INIT & init, const FUNCTION & function, const FIRST & first ) { return function( init, first ); }
 
@@ -21,46 +22,8 @@ namespace Runtime_lambda_calculus
     auto pack_fold_l( const INIT & init, const FUNCTION & function, const FIRST & first, const REST & ... rest )
     { return pack_fold_l( function( init, first ), function, rest ... ); }
 
-    template< typename ... R >
-    std::shared_ptr< const expression > app( const std::shared_ptr< const expression > & fst, const std::shared_ptr< const expression > & snd, const R & ... RES )
-    { return pack_fold_l( app( fst, snd ), [](const auto & l, const auto & r){ return app( l, r ); }, RES ... ); }
-
-    struct expression : std::enable_shared_from_this< expression >
+    /*struct expression : std::enable_shared_from_this< expression >
     {
-        struct abstraction
-        {
-            std::shared_ptr< const expression > abs;
-            explicit abstraction( const std::shared_ptr< const expression > & abs ) : abs( abs ) { }
-            std::shared_ptr< const expression > apply( const expression & exp ) { return abs->substitute( 1, exp ); }
-        };
-        struct var
-        {
-            size_t i;
-            explicit var( size_t i ) : i( i ) { }
-        };
-        struct application
-        {
-            std::shared_ptr< const expression > fst, snd;
-            explicit application( const std::shared_ptr< const expression > & fst, const std::shared_ptr< const expression > & snd ) :
-                fst( fst ), snd( snd ) { }
-        };
-        boost::variant< abstraction, var, application > v;
-        explicit expression( const abstraction & abs ) : v( abs ) { }
-        explicit expression( const var & i ) : v( i ) { }
-        explicit expression( const application & app ) : v( app ) { }
-        operator std::string( ) const
-        {
-            struct string_visitor : boost::static_visitor< std::string >
-            {
-                std::string operator( )( const abstraction & abs ) const
-                { return std::string( "(" ) + "\\." + static_cast< std::string >(*abs.abs) + ")"; }
-                std::string operator( )( const var & i ) const { return std::to_string( i.i ) + " "; }
-                std::string operator( )( const application & app ) const
-                { return "(" + static_cast< std::string >(*app.fst) + static_cast< std::string >(*app.snd) + ")"; }
-            };
-            string_visitor sv;
-            return v.apply_visitor( sv );
-        }
         std::shared_ptr< const expression > substitute( size_t i, const expression & exp ) const
         {
             struct substitute_visitor : boost::static_visitor< std::shared_ptr< const expression > >
@@ -182,8 +145,6 @@ namespace Runtime_lambda_calculus
             lesser_visitor_out lvo { cmp };
             return v.apply_visitor( lvo );
         }
-        bool operator == ( const expression & cmp ) const { return ! (((*this) < cmp) || (cmp < (*this))); }
-        bool operator != ( const expression & cmp ) const { return ! (*this == cmp); }
         boost::optional< abstraction > eval_abstraction( ) const
         {
             struct eval_abstraction_visitor : boost::static_visitor< boost::optional< abstraction > >
@@ -222,11 +183,6 @@ namespace Runtime_lambda_calculus
             auto ret = eval_step( );
             return *ret == *this ? ret : ret->eval( );
         }
-    };
-    std::shared_ptr< const expression > var( size_t i ) { return std::make_shared< expression >( expression::var( i ) ); }
-    std::shared_ptr< const expression > abs( const std::shared_ptr< const expression > & exp )
-    { return std::make_shared< const expression >( expression::abstraction( exp ) ); }
-    std::shared_ptr< const expression > app( const std::shared_ptr< const expression > & fst, const std::shared_ptr< const expression > & snd )
-    { return std::make_shared< const expression >( expression::application( fst, snd ) ); }
+    };*/
 }
 #endif
