@@ -21,7 +21,8 @@ int main( )
     //Bridge( Conditional );
     //Bridge( True );
     //Bridge( False );
-    exp I_ = abs<>( exp( var< >( 1 ) ) );
+    exp in = var< >( 1 );
+    exp I_ = abs< >( in );
     //Bridge( I );
     //Bridge( K );
     //Bridge( S );

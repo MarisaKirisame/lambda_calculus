@@ -11,21 +11,21 @@ namespace Runtime_lambda_calculus
     struct Compiletime_Runtime_converter< Compiletime_lambda_calculus::application< fst, snd > >
     {
         exp operator ( )( ) const
-        { return app< >( Compiletime_Runtime_converter< fst >( )( ), Compiletime_Runtime_converter< snd >( )( ) ); }
+        { return app( Compiletime_Runtime_converter< fst >( )( ), Compiletime_Runtime_converter< snd >( )( ) ); }
     };
 
     template< typename abst >
     struct Compiletime_Runtime_converter< Compiletime_lambda_calculus::abstraction< abst > >
     {
         exp operator ( )( ) const
-        { return abs< >( Compiletime_Runtime_converter< abst >( )( ) ); }
+        { return abs( Compiletime_Runtime_converter< abst >( )( ) ); }
     };
 
     template< size_t i >
     struct Compiletime_Runtime_converter< Compiletime_lambda_calculus::variable< i > >
     {
         exp operator ( )( ) const
-        { return var< >( i ); }
+        { return var( i ); }
     };
 }
 #endif //lambda_calculus_Runtime_Compiletime_Runtime
