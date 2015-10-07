@@ -1,4 +1,4 @@
-#include "Compiletime/example.hpp"
+#include "Compiletime/test.hpp"
 #include "Runtime/lambda_calculus.hpp"
 #include "Runtime/Compiletime_Runtime.hpp"
 #include "cassert"
